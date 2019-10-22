@@ -5,6 +5,7 @@ nav.pagination {
 }
 nav.pagination ul {
   display: flex;
+  list-style: none;
   margin-left: auto;
 }
 nav.pagination ul li {
@@ -13,7 +14,6 @@ nav.pagination ul li {
   background: white;
   min-width: 31px;
   height: 31px;
-  padding: 0 5px;
   align-items: center;
   justify-content: center;
   border: 1px solid #d9d9d9;
@@ -33,8 +33,8 @@ nav.pagination ul li.active {
   pointer-events: none;
 }
 nav.pagination ul li.active:hover {
-  border-color: ##40a9ff;
-  color: ##40a9ff;
+  border-color: #40a9ff;
+  color: #40a9ff;
 }
 nav.pagination ul li.disable {
   cursor: not-allowed;
