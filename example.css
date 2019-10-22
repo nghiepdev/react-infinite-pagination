@@ -1,0 +1,48 @@
+nav.pagination {
+  display: flex;
+  user-select: none;
+  overflow-y: auto;
+}
+nav.pagination ul {
+  display: flex;
+  margin-left: auto;
+}
+nav.pagination ul li {
+  display: flex;
+  margin-left: 7px;
+  background: white;
+  min-width: 31px;
+  height: 31px;
+  padding: 0 5px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transition: 0.3s all;
+  cursor: pointer;
+  outline: none;
+}
+nav.pagination ul li.active,
+nav.pagination ul li:hover,
+nav.pagination ul li:focus {
+  border-color: #4886ff;
+  color: #4886ff;
+}
+nav.pagination ul li.active {
+  pointer-events: none;
+}
+nav.pagination ul li.active:hover {
+  border-color: ##40a9ff;
+  color: ##40a9ff;
+}
+nav.pagination ul li.disable {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.8;
+  color: rgba(0, 0, 0, 0.25);
+  border-color: initial;
+}
+nav.pagination ul li a {
+  color: inherit;
+}
