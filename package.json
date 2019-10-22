@@ -1,6 +1,6 @@
 {
   "name": "react-infinite-pagination",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A React component to render a infinite pagination(without total page) just like google",
   "keywords": [
     "pagination",
