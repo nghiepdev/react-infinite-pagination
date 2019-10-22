@@ -1,12 +1,10 @@
 nav.pagination {
-  display: flex;
   user-select: none;
   overflow-y: auto;
 }
 nav.pagination ul {
   display: flex;
   list-style: none;
-  margin-left: auto;
 }
 nav.pagination ul li {
   display: flex;
