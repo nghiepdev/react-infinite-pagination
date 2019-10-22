@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 const Pagination = ({
   pageInVisible,
-  lastPage,
   hideOnSinglePage,
   wrapClassName,
   itemClassName,
@@ -14,6 +13,19 @@ const Pagination = ({
 }) => {
   const mountedRef = useRef();
   const [current, setCurrent] = useState(Math.max(1, props.current));
+  const lastPage = useMemo(() => {
+    const {lastPage} = props;
+
+    if (typeof lastPage !== 'number') {
+      return undefined;
+    }
+
+    if (lastPage < 0 || !lastPage) {
+      return undefined;
+    }
+
+    return lastPage;
+  }, [props.lastPage]);
 
   const pages = useMemo(() => {
     let left = false;
@@ -74,8 +86,6 @@ const Pagination = ({
     } else {
       mountedRef.current = true;
     }
-
-    // eslint-disable-next-line
   }, [current]);
 
   function renderPage(page) {
@@ -153,6 +163,7 @@ Pagination.propTypes = {
   lastPage: PropTypes.number,
   hideOnSinglePage: PropTypes.bool,
   wrapClassName: PropTypes.string,
+  itemClassName: PropTypes.string,
   onChange: PropTypes.func,
   renderPageItem: PropTypes.func,
   renderPrev: PropTypes.func,
