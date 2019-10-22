@@ -9,6 +9,7 @@
   ],
   "main": "bundle.js",
   "files": [
+    "example.css",
     "LICENCE",
     "README.md"
   ],
