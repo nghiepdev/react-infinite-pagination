@@ -154,7 +154,9 @@ Pagination.propTypes = {
   hideOnSinglePage: PropTypes.bool,
   wrapClassName: PropTypes.string,
   onChange: PropTypes.func,
-  itemRender: PropTypes.func,
+  renderPageItem: PropTypes.func,
+  renderPrev: PropTypes.func,
+  renderNext: PropTypes.func,
 };
 
 Pagination.defaultProps = {

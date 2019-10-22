@@ -7,7 +7,10 @@ module.exports = {
     file: 'bundle.js',
     format: 'umd',
     name: 'react-infinite-pagination',
-    globals: {react: 'React'},
+    globals: {
+      react: 'React',
+      'prop-types': 'PropTypes',
+    },
   },
   plugins: [
     resolve(),
