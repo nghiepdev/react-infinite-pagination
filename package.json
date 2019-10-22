@@ -4,8 +4,7 @@
   "description": "A React component to render a infinite pagination(without total page) just like google",
   "keywords": [
     "pagination",
-    "paginate",
-    "infinite"
+    "paginate"
   ],
   "main": "bundle.js",
   "files": [
@@ -25,7 +24,9 @@
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-node-resolve": "^5.2.0"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "react": ">= 16.8.0"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/nghiepit/react-infinite-pagination.git"
