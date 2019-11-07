@@ -15,7 +15,7 @@ const Pagination = ({
   renderNext: NextPage,
   ...props
 }) => {
-  const randomNumber = getRandomInt(999999);
+  const randomNumber = useMemo(() => getRandomInt(999999), []);
   const mountedRef = useRef();
   const [current, setCurrent] = useState(Math.max(1, props.current));
   const lastPage = useMemo(() => {
