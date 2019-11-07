@@ -1,6 +1,10 @@
 import React, {useEffect, useState, useMemo, useRef} from 'react';
 import PropTypes from 'prop-types';
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
 const Pagination = ({
   pageInVisible,
   hideOnSinglePage,
@@ -11,10 +15,11 @@ const Pagination = ({
   renderNext: NextPage,
   ...props
 }) => {
+  const randomNumber = getRandomInt(999999);
   const mountedRef = useRef();
   const [current, setCurrent] = useState(Math.max(1, props.current));
   const lastPage = useMemo(() => {
-    const {lastPage} = props;
+    const lastPage = props.lastPage;
 
     if (typeof lastPage !== 'number') {
       return undefined;
@@ -98,7 +103,7 @@ const Pagination = ({
         onClick={handleSelectPage(page, disable)}
         onKeyDown={handleEnterSelectPage(page, disable)}
         role="presentation"
-        tabIndex={page}>
+        tabIndex={randomNumber + page}>
         <ItemPage page={page}>{page}</ItemPage>
       </li>
     );
@@ -117,7 +122,7 @@ const Pagination = ({
         onKeyDown={handleEnterSelectPage(current - 1, disable)}
         role="presentation"
         aria-disabled={disable}
-        tabIndex={first - 1}>
+        tabIndex={randomNumber + first - 1}>
         <PrevPage page={current - 1}>prev</PrevPage>
       </li>
     );
@@ -136,7 +141,7 @@ const Pagination = ({
         onKeyDown={handleEnterSelectPage(current + 1, disable)}
         role="presentation"
         aria-disabled={disable}
-        tabIndex={last + 1}>
+        tabIndex={randomNumber + last + 1}>
         <NextPage page={current + 1}>next</NextPage>
       </li>
     );
