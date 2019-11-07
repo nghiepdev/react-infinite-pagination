@@ -17,7 +17,7 @@ yarn add react-infinite-pagination
 
 ## Usage[(Hooks only)](https://reactjs.org/docs/hooks-intro.html)
 
-Example: https://codesandbox.io/s/wonderful-brown-gtdsp
+Example: https://codesandbox.io/s/react-infinite-pagination-example-gtdsp
 
 ```js
 import Pagination from 'react-infinite-pagination';
