@@ -21,7 +21,7 @@ export interface PaginationProps {
   renderNext?: React.ComponentType<{page: number}>;
 }
 
-const Pagination = ({
+export const Pagination = ({
   pageInVisible = 10,
   hideOnSinglePage = true,
   wrapClassName = 'pagination',
@@ -175,5 +175,3 @@ const Pagination = ({
     </nav>
   ) : null;
 };
-
-export {Pagination};
