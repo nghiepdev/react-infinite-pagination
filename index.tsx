@@ -1,23 +1,39 @@
 import React, {useEffect, useState, useMemo, useRef} from 'react';
-import PropTypes from 'prop-types';
 
-function getRandomInt(max) {
+function getRandomInt(max: number) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
+const Noop = ({children}: {children?: React.ReactNode}) => {
+  return <a>{children}</a>;
+};
+
+export interface PaginationProps {
+  pageInVisible?: number;
+  current?: number;
+  lastPage?: number;
+  hideOnSinglePage?: boolean;
+  wrapClassName?: string;
+  itemClassName?: string;
+  onChange?: (current: number) => void;
+  renderPageItem?: React.ComponentType<{page: number}>;
+  renderPrev?: React.ComponentType<{page: number}>;
+  renderNext?: React.ComponentType<{page: number}>;
+}
+
 const Pagination = ({
-  pageInVisible,
-  hideOnSinglePage,
-  wrapClassName,
-  itemClassName,
-  renderPageItem: ItemPage,
-  renderPrev: PrevPage,
-  renderNext: NextPage,
+  pageInVisible = 10,
+  hideOnSinglePage = true,
+  wrapClassName = 'pagination',
+  itemClassName = 'pagination-item',
+  renderPageItem: ItemPage = Noop,
+  renderPrev: PrevPage = Noop,
+  renderNext: NextPage = Noop,
   ...props
-}) => {
+}: PaginationProps) => {
   const randomNumber = useMemo(() => getRandomInt(999999), []);
-  const mountedRef = useRef();
-  const [current, setCurrent] = useState(Math.max(1, props.current));
+  const mountedRef = useRef<boolean>();
+  const [current, setCurrent] = useState(Math.max(1, props.current ?? 1));
   const lastPage = useMemo(() => {
     const lastPage = props.lastPage;
 
@@ -59,8 +75,8 @@ const Pagination = ({
     return pages;
   }, [current, lastPage, pageInVisible]);
 
-  function handleSelectPage(page, isPrevent) {
-    return e => {
+  function handleSelectPage(page: number, isPrevent: boolean) {
+    return (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
       e.preventDefault();
 
       if (isPrevent) {
@@ -71,8 +87,8 @@ const Pagination = ({
     };
   }
 
-  function handleEnterSelectPage(page, isPrevent) {
-    return e => {
+  function handleEnterSelectPage(page: number, isPrevent: boolean) {
+    return (e: React.KeyboardEvent<HTMLLIElement>) => {
       if (isPrevent) {
         return;
       }
@@ -93,7 +109,7 @@ const Pagination = ({
     }
   }, [current]);
 
-  function renderPage(page) {
+  function renderPage(page: number) {
     const disable = page === current;
 
     return (
@@ -102,7 +118,7 @@ const Pagination = ({
         className={`${itemClassName} ${disable ? 'active' : ''}`}
         onClick={handleSelectPage(page, disable)}
         onKeyDown={handleEnterSelectPage(page, disable)}
-        role="presentation"
+        role='presentation'
         tabIndex={randomNumber + page}>
         <ItemPage page={page}>{page}</ItemPage>
       </li>
@@ -120,7 +136,7 @@ const Pagination = ({
         }`}
         onClick={handleSelectPage(current - 1, disable)}
         onKeyDown={handleEnterSelectPage(current - 1, disable)}
-        role="presentation"
+        role='presentation'
         aria-disabled={disable}
         tabIndex={randomNumber + first - 1}>
         <PrevPage page={current - 1}>prev</PrevPage>
@@ -139,7 +155,7 @@ const Pagination = ({
         }`}
         onClick={handleSelectPage(current + 1, disable)}
         onKeyDown={handleEnterSelectPage(current + 1, disable)}
-        role="presentation"
+        role='presentation'
         aria-disabled={disable}
         tabIndex={randomNumber + last + 1}>
         <NextPage page={current + 1}>next</NextPage>
@@ -147,43 +163,17 @@ const Pagination = ({
     );
   }
 
-  return (
-    (!hideOnSinglePage || pages.length > 1) && (
-      <nav className={wrapClassName} role="navigation">
-        <ul unselectable="unselectable">
-          {renderPrev()}
+  return false === hideOnSinglePage || pages.length > 1 ? (
+    <nav className={wrapClassName} role='navigation'>
+      <ul>
+        {renderPrev()}
 
-          {pages.map(renderPage)}
+        {pages.map(renderPage)}
 
-          {renderNext()}
-        </ul>
-      </nav>
-    )
-  );
+        {renderNext()}
+      </ul>
+    </nav>
+  ) : null;
 };
 
-Pagination.propTypes = {
-  pageInVisible: PropTypes.number,
-  current: PropTypes.number,
-  lastPage: PropTypes.number,
-  hideOnSinglePage: PropTypes.bool,
-  wrapClassName: PropTypes.string,
-  itemClassName: PropTypes.string,
-  onChange: PropTypes.func,
-  renderPageItem: PropTypes.func,
-  renderPrev: PropTypes.func,
-  renderNext: PropTypes.func,
-};
-
-Pagination.defaultProps = {
-  pageInVisible: 10,
-  current: 1,
-  hideOnSinglePage: true,
-  wrapClassName: 'pagination',
-  itemClassName: 'pagination-item',
-  renderPageItem: ({children}) => <a>{children}</a>,
-  renderPrev: ({children}) => <a>{children}</a>,
-  renderNext: ({children}) => <a>{children}</a>,
-};
-
-export default Pagination;
+export {Pagination};

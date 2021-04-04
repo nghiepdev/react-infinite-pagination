@@ -17,10 +17,10 @@ yarn add react-infinite-pagination
 
 ## Usage[(Hooks only)](https://reactjs.org/docs/hooks-intro.html)
 
-Example: https://codesandbox.io/s/react-infinite-pagination-example-gtdsp
+Example: https://codesandbox.io/s/react-infinite-pagination-example-rx32s
 
-```js
-import Pagination from 'react-infinite-pagination';
+```tsx
+import {Pagination} from 'react-infinite-pagination';
 import 'react-infinite-pagination/example.css';
 
 const Datatable = () => {
@@ -51,7 +51,7 @@ A: You want to update the `current` prop value, for example fetch data from serv
 
 You can use the `key` to re-mount the pagination component.
 
-```js
+```tsx
 const {data, pagination} = await fetch('/api/posts');
 
 <Pagination key={pagination.current} current={pagination.current} />;
@@ -59,4 +59,4 @@ const {data, pagination} = await fetch('/api/posts');
 
 ## License
 
-MIT © [Nghiep](https://nghiepit.dev)
+MIT
