@@ -6,26 +6,22 @@
     "pagination",
     "paginate"
   ],
-  "main": "bundle.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "example.css",
-    "LICENCE",
-    "README.md"
+    "dist"
   ],
   "scripts": {
-    "build": "rollup -c --environment BUILD:production",
+    "build": "tsc",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.2",
-    "@babel/preset-env": "^7.7.1",
-    "@babel/preset-react": "^7.7.0",
-    "rollup": "^1.26.3",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-node-resolve": "^5.2.0"
+    "@types/react": "^17.0.3",
+    "typescript": "^4.2.3"
   },
   "peerDependencies": {
-    "react": ">= 16.8.0"
+    "react": ">=16.8"
   },
   "repository": {
     "type": "git",
