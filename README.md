@@ -1,13 +1,13 @@
 # react-infinite-pagination
 
 [![NPM version](https://img.shields.io/npm/v/react-infinite-pagination.svg)](https://www.npmjs.com/package/react-infinite-pagination)
-[![NPM monthly download](https://img.shields.io/npm/dy/react-infinite-pagination.svg)](https://www.npmjs.com/package/react-infinite-pagination)
+[![NPM monthly download](https://img.shields.io/npm/dm/react-infinite-pagination.svg)](https://www.npmjs.com/package/react-infinite-pagination)
 
 > A React component to render a infinite pagination(without total page) just like google
 
 By installing this component and using my `example.css` you can obtain this:
 
-![screenshot](screenshot.png)
+[![screenshot](screenshot.png)](https://codesandbox.io/s/react-infinite-pagination-example-rx32s)
 
 ## Installation
 
