@@ -28,34 +28,20 @@ const Datatable = () => {
 };
 ```
 
-## Props
+## Options
 
-| Name             | Type                  | Description                                                              |
-| ---------------- | --------------------- | ------------------------------------------------------------------------ |
-| pageInVisible    | Number                | The number of pages to display. Default: `10`                            |
-| current          | Number                | The current page selected. Default: `1`                                  |
-| lastPage         | Number                | The total number of pages. If `undefined` the pagination will infinite   |
-| hideOnSinglePage | Boolean               | Whether to hide pager on single page                                     |
-| wrapClassName    | String                | The class name of the container of the pagination. Default: `pagination` |
-| itemClassName    | String                | The class name of the page item. Default: `pagination-item`              |
-| onChange         | (page) => {}          | The callback executed when the page number is changed                    |
-| renderPageItem   | ({page}) => ReactNode | The component to render the page item. Don't use it                      |
-| renderPrev       | ({page}) => ReactNode | The component to render the previous button                              |
-| renderNext       | ({page}) => ReactNode | The component to render the previous button                              |
-
-## FAQ
-
-### Q: How to force update `current` prop?
-
-A: You want to update the `current` prop value, for example fetch data from server.
-
-You can use the `key` to re-mount the pagination component.
-
-```tsx
-const {data, pagination} = await fetch('/api/posts');
-
-<Pagination key={pagination.current} current={pagination.current} />;
-```
+| Name             | Type                              | Description                                                                       |
+| ---------------- | --------------------------------- | --------------------------------------------------------------------------------- |
+| pageInVisible    | Number                            | The number of pages to display. Default: `10`                                     |
+| current          | Number                            | The current page selected. Default: `1`                                           |
+| lastPage         | Number                            | The total number of pages. If `undefined` the pagination will infinite            |
+| hideOnSinglePage | Boolean                           | Whether to hide pager on single page                                              |
+| wrapClassName    | String                            | The class name of the container of the pagination. Default: `infinite-pagination` |
+| itemClassName    | String                            | The class name of the page item. Default: `infinite-pagination-item`              |
+| onChange         | Function(current: number) => void | The callback executed when the page number is changed                             |
+| renderPageItem   | Component<{current: number}>      | The component to render the page item                                             |
+| renderPrev       | Component<{current: number}>      | The component to render the previous button                                       |
+| renderNext       | Component<{current: number}>      | The component to render the next button                                           |
 
 ## License
 
