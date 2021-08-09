@@ -39,7 +39,7 @@ export const Pagination = ({
     }
 
     return current;
-  }, [props.current]);
+  }, [props.current, lastPage]);
 
   const [current, setCurrent] = useState(initialStateFn);
 
