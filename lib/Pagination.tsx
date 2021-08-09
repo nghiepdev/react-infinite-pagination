@@ -1,25 +1,10 @@
 import React, {useEffect, useState, useMemo, useRef} from 'react';
 
-function getRandomInt(max: number) {
-  return Math.floor(Math.random() * Math.floor(max));
-}
+import {PaginationProps} from './types';
 
-const Noop = ({children}: {children?: React.ReactNode}) => {
+const Noop = ({children}: React.PropsWithChildren<any>) => {
   return <a>{children}</a>;
 };
-
-export interface PaginationProps {
-  pageInVisible?: number;
-  current?: number;
-  lastPage?: number;
-  hideOnSinglePage?: boolean;
-  wrapClassName?: string;
-  itemClassName?: string;
-  onChange?: (current: number) => void;
-  renderPageItem?: React.ComponentType<{page: number}>;
-  renderPrev?: React.ComponentType<{page: number}>;
-  renderNext?: React.ComponentType<{page: number}>;
-}
 
 export const Pagination = ({
   pageInVisible = 10,
@@ -31,9 +16,9 @@ export const Pagination = ({
   renderNext: NextPage = Noop,
   ...props
 }: PaginationProps) => {
-  const randomNumber = useMemo(() => getRandomInt(999999), []);
-  const mountedRef = useRef<boolean>();
+  const mountedRef = useRef<boolean>(false);
   const [current, setCurrent] = useState(Math.max(1, props.current ?? 1));
+
   const lastPage = useMemo(() => {
     const lastPage = props.lastPage;
 
@@ -101,9 +86,7 @@ export const Pagination = ({
 
   useEffect(() => {
     if (mountedRef.current) {
-      if (props.onChange) {
-        props.onChange(current);
-      }
+      props.onChange?.(current);
     } else {
       mountedRef.current = true;
     }
@@ -118,15 +101,13 @@ export const Pagination = ({
         className={`${itemClassName} ${disable ? 'active' : ''}`}
         onClick={handleSelectPage(page, disable)}
         onKeyDown={handleEnterSelectPage(page, disable)}
-        role='presentation'
-        tabIndex={randomNumber + page}>
+        tabIndex={0}>
         <ItemPage page={page}>{page}</ItemPage>
       </li>
     );
   }
 
   function renderPrev() {
-    let {0: first} = pages;
     const disable = current <= 1;
 
     return (
@@ -136,16 +117,14 @@ export const Pagination = ({
         }`}
         onClick={handleSelectPage(current - 1, disable)}
         onKeyDown={handleEnterSelectPage(current - 1, disable)}
-        role='presentation'
         aria-disabled={disable}
-        tabIndex={randomNumber + first - 1}>
+        tabIndex={0}>
         <PrevPage page={current - 1}>prev</PrevPage>
       </li>
     );
   }
 
   function renderNext() {
-    let {length: l, [l - 1]: last} = pages;
     const disable = lastPage !== undefined && current >= lastPage;
 
     return (
@@ -155,9 +134,8 @@ export const Pagination = ({
         }`}
         onClick={handleSelectPage(current + 1, disable)}
         onKeyDown={handleEnterSelectPage(current + 1, disable)}
-        role='presentation'
         aria-disabled={disable}
-        tabIndex={randomNumber + last + 1}>
+        tabIndex={0}>
         <NextPage page={current + 1}>next</NextPage>
       </li>
     );
@@ -165,11 +143,9 @@ export const Pagination = ({
 
   return false === hideOnSinglePage || pages.length > 1 ? (
     <nav className={wrapClassName} role='navigation'>
-      <ul>
+      <ul unselectable='on'>
         {renderPrev()}
-
         {pages.map(renderPage)}
-
         {renderNext()}
       </ul>
     </nav>
