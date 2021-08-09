@@ -4,12 +4,13 @@
   "description": "A React component to render a infinite pagination(without total page) just like google",
   "keywords": [
     "pagination",
-    "paginate"
+    "paginate",
+    "infinite-paginate"
   ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "example.css",
+    "lib/example.css",
     "dist"
   ],
   "scripts": {

@@ -112,9 +112,7 @@ export const Pagination = ({
 
     return (
       <li
-        className={`${itemClassName} pagination-prev ${
-          disable ? 'disable' : ''
-        }`}
+        className={`${itemClassName}${disable ? ' disable' : ''}`}
         onClick={handleSelectPage(current - 1, disable)}
         onKeyDown={handleEnterSelectPage(current - 1, disable)}
         aria-disabled={disable}
@@ -129,9 +127,7 @@ export const Pagination = ({
 
     return (
       <li
-        className={`${itemClassName} pagination-next ${
-          disable ? 'disable' : ''
-        }`}
+        className={`${itemClassName}${disable ? ' disable' : ''}`}
         onClick={handleSelectPage(current + 1, disable)}
         onKeyDown={handleEnterSelectPage(current + 1, disable)}
         aria-disabled={disable}

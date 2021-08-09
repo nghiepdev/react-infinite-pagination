@@ -21,7 +21,7 @@ Example: https://codesandbox.io/s/react-infinite-pagination-example-rx32s
 
 ```tsx
 import {Pagination} from 'react-infinite-pagination';
-import 'react-infinite-pagination/example.css';
+import 'react-infinite-pagination/lib/example.css';
 
 const Datatable = () => {
   return <Pagination current={6} />;
