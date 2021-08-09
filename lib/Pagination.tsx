@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useMemo, useRef} from 'react';
+import React, {useEffect, useState, useMemo, useRef, useCallback} from 'react';
 
 import {PaginationProps} from './types';
 
@@ -17,7 +17,6 @@ export const Pagination = ({
   ...props
 }: PaginationProps) => {
   const mountedRef = useRef<boolean>(false);
-  const [current, setCurrent] = useState(Math.max(1, props.current ?? 1));
 
   const lastPage = useMemo(() => {
     const lastPage = props.lastPage;
@@ -32,6 +31,17 @@ export const Pagination = ({
 
     return lastPage;
   }, [props.lastPage]);
+
+  const initialStateFn = useCallback(() => {
+    const current = Math.max(1, props.current ?? 1);
+    if (lastPage) {
+      return Math.min(lastPage, current);
+    }
+
+    return current;
+  }, [props.current]);
+
+  const [current, setCurrent] = useState(initialStateFn);
 
   const pages = useMemo(() => {
     let left = false;
@@ -85,12 +95,22 @@ export const Pagination = ({
   }
 
   useEffect(() => {
-    if (mountedRef.current) {
-      props.onChange?.(current);
-    } else {
+    if (mountedRef.current === false) {
       mountedRef.current = true;
     }
-  }, [current]);
+  }, []);
+
+  useEffect(() => {
+    if (mountedRef.current) {
+      props.onChange?.(current);
+    }
+  }, [current, props.onChange]);
+
+  useEffect(() => {
+    if (mountedRef.current) {
+      setCurrent(initialStateFn);
+    }
+  }, [initialStateFn]);
 
   function renderPage(page: number) {
     const disable = page === current;
