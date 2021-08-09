@@ -9,8 +9,8 @@ const Noop = ({children}: React.PropsWithChildren<any>) => {
 export const Pagination = ({
   pageInVisible = 10,
   hideOnSinglePage = true,
-  wrapClassName = 'pagination',
-  itemClassName = 'pagination-item',
+  wrapClassName = 'infinite-pagination',
+  itemClassName = 'infinite-pagination-item',
   renderPageItem: ItemPage = Noop,
   renderPrev: PrevPage = Noop,
   renderNext: NextPage = Noop,
